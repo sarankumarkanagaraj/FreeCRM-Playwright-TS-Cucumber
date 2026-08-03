@@ -1,15 +1,19 @@
 # FreeCRM Playwright TypeScript Cucumber Automation Framework
 
-## Project Overview
+## Overview
 
-This project is an End-to-End UI Automation Framework developed for automating the FreeCRM application using:
+This project is a UI Automation Framework developed using:
 
 - Playwright
 - TypeScript
 - Cucumber (BDD)
 - Page Object Model (POM)
 
-This framework is developed as part of the Playwright Framework Assignment.
+The framework is created for automating the FreeCRM application as part of the automation assignment.
+
+Application URL:
+
+https://ui.freecrm.com/
 
 ---
 
@@ -19,157 +23,156 @@ This framework is developed as part of the Playwright Framework Assignment.
 - TypeScript
 - Cucumber
 - Node.js
-- Faker
-- XLSX
-- Dotenv
-
----
-
-## Framework Features
-
-- Environment Variable Support (.env)
 - Page Object Model (POM)
-- Reusable Utility Functions
-- Cucumber Feature Files
-- Step Definitions
-- Hooks
-- HTML Reports
-- JSON Reports
-- Screenshots
-- Data Driven Testing using JSON & Excel
-- Faker Test Data
-- GitHub Version Control
+- Git & GitHub
 
 ---
 
 ## Project Structure
 
 ```
-FreeCRM-Playwright-TS-Cucumber
+features/
+│
+├── login.feature
+├── company.feature
+├── contact.feature
+└── deals.feature
 
-├── features
-├── reports
-├── screenshots
-├── src
-│   ├── pages
-│   ├── locators
-│   ├── steps
-│   ├── support
-│   ├── utils
-│   ├── config
-│   ├── fixtures
-│   └── testData
-├── .env
-├── cucumber.js
-├── package.json
-├── tsconfig.json
-└── README.md
+src/
+│
+├── common/
+├── config/
+├── constants/
+├── fixtures/
+├── hooks/
+├── locators/
+├── pages/
+├── pageFactory/
+├── steps/
+├── support/
+├── testData/
+│   ├── excel/
+│   └── json/
+└── utils/
+
+reports/
+screenshots/
+traces/
 ```
 
 ---
 
-## Application Under Test
+## Setup
 
-FreeCRM
+Clone the repository
 
-https://ui.freecrm.com/
-
----
-
-## Prerequisites
-
-- Node.js
-- Visual Studio Code
-- Git
-- Playwright Browsers
-
-Install browsers:
-
-```
-npx playwright install
+```bash
+git clone https://github.com/sarankumarkanagaraj/FreeCRM-Playwright-TS-Cucumber.git
 ```
 
----
+Install dependencies
 
-## Installation
-
-Clone Repository
-
-```
-git clone <repository-url>
-```
-
-Install Dependencies
-
-```
+```bash
 npm install
 ```
 
 ---
 
-## Execute Tests
+## Environment Configuration
 
-Run all tests
+Copy
 
 ```
+.env.example
+```
+
+Rename it to
+
+```
+.env
+```
+
+Update your own credentials.
+
+Example:
+
+```env
+BASE_URL=https://ui.freecrm.com/
+
+APP_USERNAME=your_email@gmail.com
+APP_PASSWORD=your_password
+
+BROWSER=chromium
+HEADLESS=false
+SLOWMO=300
+```
+
+> **Note:** Do not commit your `.env` file. It contains personal credentials.
+
+---
+
+## Execute Tests
+
+Run all scenarios
+
+```bash
 npm test
 ```
 
-Run Cucumber
+or
 
-```
-npm run cucumber
-```
-
----
-
-## Reports
-
-Reports are generated under
-
-```
-reports/
-```
-
-Screenshots are stored under
-
-```
-screenshots/
+```bash
+npx cucumber-js
 ```
 
 ---
 
-## Team Members
+## Current Automation
 
-- Sarankumar Kanagaraj (POC / Framework)
-- Mansur Shaikh
-- Shyamala Rajappa
-- Sneha D Pandey
+- Login Module ✅
+- Company Module (In Progress)
+- Contact Module (In Progress)
+- Deals Module (In Progress)
 
 ---
 
-## Assignment Checklist
+## Framework Features
 
-- Environment Variables
-- Data Driven Framework
-- Faker Integration
+- Playwright + TypeScript
+- Cucumber BDD
 - Page Object Model
-- HTML Reporting
-- Global Hooks
-- Coding Standards
-- Reusable Functions
-- Azure DevOps Integration (Future Enhancement)
+- Locator Repository
+- Base Page
+- Custom World
+- Hooks
+- Environment Configuration
+- JSON Test Data
+- Excel Test Data
+- Screenshot Capture
+- Trace Generation
+- HTML Reports
+- GitHub Version Control
 
 ---
 
-## Version Control
+## Team Guidelines
 
-GitHub Branch Strategy
+- Clone the repository.
+- Create your own feature branch.
+- Work only on your assigned module.
+- Do not modify common framework files without informing the POC.
+- Use your own `.env` file with your own credentials.
+- Commit only to your own branch.
+- Raise a Pull Request after completing your assigned module.
 
-- main
-- sarankumar
-- mansur
-- shyamala
-- sneha
+---
 
-Each team member will work on their own branch and merge after successful validation.
+## Repository
+
+https://github.com/sarankumarkanagaraj/FreeCRM-Playwright-TS-Cucumber
+
+---
+
+## Author
+
+Sarankumar Kanagaraj
