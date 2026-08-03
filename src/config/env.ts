@@ -9,5 +9,5 @@ export const ENV = {
   BROWSER: process.env.BROWSER ?? 'chromium',
   HEADLESS: process.env.HEADLESS === 'true',
   SLOWMO: Number(process.env.SLOWMO ?? 0),
-  BASE_API_URL: process.env.BASE_API_URL ?? '',
+  BASE_API_URL: process.env.BASE_API_URL ?? ''
 };

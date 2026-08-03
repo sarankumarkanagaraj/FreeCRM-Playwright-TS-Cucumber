@@ -19,7 +19,7 @@ When('user creates a new deal', async function () {
     DealData.amount,
     DealData.stage,
     DealData.company,
-    DealData.contact,
+    DealData.contact
   );
 });
 
@@ -45,4 +45,20 @@ Then('deal should not exist', async function () {
 
 Then('deal should be displayed', async function () {
   await dealsPage.verifyDealDisplayed(DealData.title);
+});
+
+Then('deal amount should be displayed', async function () {
+  await dealsPage.verifyAmount('50,000');
+});
+
+Then('deal stage should be displayed', async function () {
+  await dealsPage.verifyStage(DealData.stage);
+});
+
+Then('deal owner should be displayed', async function () {
+  await dealsPage.verifyOwner('Sarankumar Kanagaraj');
+});
+
+When('user changes deal stage to {string}', async function (stage: string) {
+  await dealsPage.changeStage(stage);
 });

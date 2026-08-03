@@ -19,4 +19,14 @@ export class DealsLocators {
   editButton = 'button:has(.edit.icon)';
   deleteButton = 'button:has(.trash.icon)';
   confirmDeleteButton = 'button.ui.red.button';
+
+  owner = '.ui.field:has(.ui.label:text("Assigned To"))';
+
+  amountLabel = '.ui.field:has(.ui.label:text("Amount"))';
+
+  stageLabel = '.ui.field:has(.ui.label:text("Stage"))';
+
+  closeDateLabel = '.ui.field:has(.ui.label:text("Close Date"))';
+
+  notesAddButton = 'button.custom-note-btn';
 }

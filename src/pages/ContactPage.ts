@@ -69,7 +69,7 @@ export class ContactPage extends BasePage {
 
     const row = this.page
       .locator(
-        `tr:has(a:has-text("${ContactData.updatedFirstName} ${ContactData.updatedLastName}"))`,
+        `tr:has(a:has-text("${ContactData.updatedFirstName} ${ContactData.updatedLastName}"))`
       )
       .first();
 

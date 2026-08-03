@@ -23,6 +23,6 @@ When('user clicks on Login button', async function () {
 
 Then('user should be logged in successfully', async function (this: CustomWorld) {
   await expect(this.page!.getByPlaceholder('Search')).toBeVisible({
-    timeout: 10000,
+    timeout: 10000
   });
 });

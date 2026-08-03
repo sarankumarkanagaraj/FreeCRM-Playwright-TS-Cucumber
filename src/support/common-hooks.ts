@@ -26,14 +26,14 @@ BeforeAll(async function () {
     case 'msedge':
       browser = await chromium.launch({
         ...config.browserOptions,
-        channel: 'msedge',
+        channel: 'msedge'
       });
       break;
 
     case 'chrome':
       browser = await chromium.launch({
         ...config.browserOptions,
-        channel: 'chrome',
+        channel: 'chrome'
       });
       break;
 
@@ -55,17 +55,17 @@ Before(async function (this: ICustomWorld, { pickle }) {
 
     viewport: {
       width: 1440,
-      height: 900,
-    },
+      height: 900
+    }
   });
 
   this.server = await request.newContext({
-    baseURL: config.BASE_API_URL,
+    baseURL: config.BASE_API_URL
   });
 
   await this.context.tracing.start({
     screenshots: true,
-    snapshots: true,
+    snapshots: true
   });
 
   this.page = await this.context.newPage();
@@ -93,7 +93,7 @@ After(async function (this: ICustomWorld, { result }) {
       const timePart = this.startTime?.toISOString().replace(/:/g, '_').split('.')[0];
 
       await this.context?.tracing.stop({
-        path: `${tracesDir}/${this.testName}-${timePart}.zip`,
+        path: `${tracesDir}/${this.testName}-${timePart}.zip`
       });
     } else {
       await this.context?.tracing.stop();

@@ -24,3 +24,20 @@ Scenario: Delete Deal
 Given user navigates to Deals page
 When user deletes the deal
 Then deal should not exist
+
+Scenario: Verify Deal Amount
+Given user navigates to Deals page
+Then deal amount should be displayed
+
+Scenario: Verify Deal Stage
+Given user navigates to Deals page
+Then deal stage should be displayed
+
+Scenario: Verify Deal Owner
+Given user navigates to Deals page
+Then deal owner should be displayed
+
+Scenario: Change Deal Stage
+Given user navigates to Deals page
+When user changes deal stage to "Won"
+Then deal stage should be displayed

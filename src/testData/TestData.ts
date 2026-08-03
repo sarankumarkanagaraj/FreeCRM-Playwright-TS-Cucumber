@@ -1,25 +1,28 @@
+import { TestDataGenerator } from '../utils/TestDataGenerator';
+
 export const LoginData = {
   username: process.env.APP_USERNAME!,
-  password: process.env.APP_PASSWORD!,
+  password: process.env.APP_PASSWORD!
 };
 
 export const CompanyData = {
-  companyName: 'OpenAI Automation Pvt Ltd',
-  updatedCompanyName: 'OpenAI Automation Pvt Ltd Updated',
+  companyName: TestDataGenerator.companyName(),
+  updatedCompanyName: `${TestDataGenerator.companyName()} Updated`
 };
 
 export const ContactData = {
-  firstName: 'William',
+  firstName: TestDataGenerator.contactFirstName(),
   lastName: 'Jones',
-  updatedFirstName: 'William Updated',
+
+  updatedFirstName: `${TestDataGenerator.contactFirstName()} Updated`,
   updatedLastName: 'Jones Updated',
 
-  company: CompanyData.companyName,
+  company: CompanyData.companyName
 };
 
 export const DealData = {
-  title: 'Automation Deal',
-  updatedTitle: 'Automation Deal Updated',
+  title: TestDataGenerator.dealTitle(),
+  updatedTitle: `${TestDataGenerator.dealTitle()} Updated`,
 
   amount: '50000',
   updatedAmount: '75000',
@@ -32,6 +35,5 @@ export const DealData = {
   note: 'Automation Note',
 
   company: CompanyData.companyName,
-
-  contact: `${ContactData.firstName} ${ContactData.lastName}`,
+  contact: `${ContactData.firstName} ${ContactData.lastName}`
 };

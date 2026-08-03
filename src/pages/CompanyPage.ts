@@ -18,7 +18,7 @@ export class CompanyPage extends BasePage {
     await this.page
       .locator('.menu-item-wrapper')
       .filter({
-        has: this.page.locator('a[href="/companies"]'),
+        has: this.page.locator('a[href="/companies"]')
       })
       .locator('button')
       .click();
@@ -82,7 +82,7 @@ export class CompanyPage extends BasePage {
     await this.searchCompany(CompanyData.updatedCompanyName);
 
     await expect(
-      this.page.locator(`tr:has(a:has-text("${CompanyData.updatedCompanyName}"))`),
+      this.page.locator(`tr:has(a:has-text("${CompanyData.updatedCompanyName}"))`)
     ).toBeVisible();
 
     const row = this.page.locator(`tr:has(a:has-text("${CompanyData.updatedCompanyName}"))`);
@@ -100,7 +100,7 @@ export class CompanyPage extends BasePage {
     await this.searchCompany(companyName);
 
     await expect(this.page.locator(`a:has-text("${companyName}")`)).toHaveCount(0, {
-      timeout: 10000,
+      timeout: 10000
     });
   }
 }
