@@ -62,3 +62,15 @@ Then('deal owner should be displayed', async function () {
 When('user changes deal stage to {string}', async function (stage: string) {
   await dealsPage.changeStage(stage);
 });
+
+When('user creates a new deal with stage {string}', async function (stage: string) {
+  await dealsPage.clickNewDeal();
+
+  await dealsPage.createDeal(
+    DealData.title,
+    DealData.amount,
+    stage,
+    DealData.company,
+    DealData.contact
+  );
+});

@@ -1,19 +1,10 @@
-# FreeCRM Playwright TypeScript Cucumber Automation Framework
+# FreeCRM Automation Framework
 
 ## Overview
 
-This project is a UI Automation Framework developed using:
+This project is an end-to-end UI automation framework developed using Playwright, TypeScript and Cucumber (BDD) for the FreeCRM application.
 
-- Playwright
-- TypeScript
-- Cucumber (BDD)
-- Page Object Model (POM)
-
-The framework is created for automating the FreeCRM application as part of the automation assignment.
-
-Application URL:
-
-https://ui.freecrm.com/
+The framework follows the Page Object Model (POM) design pattern with reusable page classes, centralized locators, dynamic test data generation and Cucumber feature files.
 
 ---
 
@@ -21,10 +12,85 @@ https://ui.freecrm.com/
 
 - Playwright
 - TypeScript
-- Cucumber
+- Cucumber (BDD)
 - Node.js
-- Page Object Model (POM)
+- ESLint
 - Git & GitHub
+
+---
+
+## Framework Design
+
+```
+src
+│
+├── config
+├── locators
+├── pages
+├── steps
+├── support
+├── testData
+├── utils
+│
+features
+```
+
+---
+
+## Implemented Modules
+
+### Login
+
+- Login with valid credentials
+
+### Company
+
+- Create Company
+- Search Company
+- Update Company
+- Delete Company
+
+### Contact
+
+- Create Contact
+- Verify Contact
+- Update Contact
+- Delete Contact
+
+### Deal
+
+- Create Deal
+- Create Deal linked with Company
+- Create Deal linked with Contact
+- Create Deal with different stages
+- Verify Deal
+- Verify Amount
+- Verify Stage
+- Verify Owner
+- Update Deal
+- Change Deal Stage
+- Delete Deal
+
+---
+
+## Business Scenarios
+
+- Lead to Deal Flow
+- Customer Onboarding
+- Sales Pipeline Management
+
+---
+
+## Framework Features
+
+- Page Object Model (POM)
+- Cucumber BDD
+- Dynamic Test Data Generator
+- Reusable Components
+- Environment Variables
+- TypeScript Support
+- ESLint
+- GitHub Integration
 
 ---
 
@@ -32,45 +98,29 @@ https://ui.freecrm.com/
 
 ```
 features/
-│
-├── login.feature
-├── company.feature
-├── contact.feature
-└── deals.feature
+
+login.feature
+company.feature
+contact.feature
+deals.feature
+leadToDeal.feature
+customerOnboarding.feature
+salesPipeline.feature
 
 src/
-│
-├── common/
-├── config/
-├── constants/
-├── fixtures/
-├── hooks/
-├── locators/
-├── pages/
-├── pageFactory/
-├── steps/
-├── support/
-├── testData/
-│   ├── excel/
-│   └── json/
-└── utils/
 
-reports/
-screenshots/
-traces/
+config/
+locators/
+pages/
+steps/
+support/
+testData/
+utils/
 ```
 
 ---
 
-## Setup
-
-Clone the repository
-
-```bash
-git clone https://github.com/sarankumarkanagaraj/FreeCRM-Playwright-TS-Cucumber.git
-```
-
-Install dependencies
+## Installation
 
 ```bash
 npm install
@@ -78,101 +128,66 @@ npm install
 
 ---
 
-## Environment Configuration
+## Execute All Tests
 
-Copy
-
-```
-.env.example
+```bash
+npm run cucumber
 ```
 
-Rename it to
+---
 
-```
-.env
-```
+## Execute Specific Feature
 
-Update your own credentials.
+```bash
+npm run cucumber -- --name "Create Company"
+```
 
 Example:
 
-```env
-BASE_URL=https://ui.freecrm.com/
-
-APP_USERNAME=your_email@gmail.com
-APP_PASSWORD=your_password
-
-BROWSER=chromium
-HEADLESS=false
-SLOWMO=300
+```bash
+npm run cucumber -- --name "Create Deal"
 ```
-
-> **Note:** Do not commit your `.env` file. It contains personal credentials.
 
 ---
 
-## Execute Tests
-
-Run all scenarios
+## TypeScript Validation
 
 ```bash
-npm test
+npx tsc --noEmit
 ```
 
-or
+---
+
+## Lint
 
 ```bash
-npx cucumber-js
+npm run lint
 ```
 
 ---
 
-## Current Automation
+## Current Status
 
-- Login Module ✅
-- Company Module (In Progress)
-- Contact Module (In Progress)
-- Deals Module (In Progress)
+### Completed
 
----
+- Login Automation
+- Company CRUD
+- Contact CRUD
+- Deal CRUD
+- Business Scenarios
+- Dynamic Test Data
+- Playwright + Cucumber Framework
 
-## Framework Features
+### Pending Enhancements
 
-- Playwright + TypeScript
-- Cucumber BDD
-- Page Object Model
-- Locator Repository
-- Base Page
-- Custom World
-- Hooks
-- Environment Configuration
-- JSON Test Data
-- Excel Test Data
-- Screenshot Capture
-- Trace Generation
-- HTML Reports
-- GitHub Version Control
+The following assignment scenarios are identified but pending implementation due to additional application modules/UI:
+
+- Follow-up Task creation
+- Onboarding Task creation
+- Task Assignment
+- Task Completion
+- Activity History validation
+- Pipeline Count validation
+- Deal Notes automation (pending UI implementation)
 
 ---
-
-## Team Guidelines
-
-- Clone the repository.
-- Create your own feature branch.
-- Work only on your assigned module.
-- Do not modify common framework files without informing the POC.
-- Use your own `.env` file with your own credentials.
-- Commit only to your own branch.
-- Raise a Pull Request after completing your assigned module.
-
----
-
-## Repository
-
-https://github.com/sarankumarkanagaraj/FreeCRM-Playwright-TS-Cucumber
-
----
-
-## Author
-
-Sarankumar Kanagaraj

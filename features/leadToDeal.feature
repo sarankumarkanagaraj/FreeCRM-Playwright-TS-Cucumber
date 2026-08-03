@@ -6,7 +6,7 @@ Background:
   And user clicks on Login button
   Then user should be logged in successfully
 
-Scenario: Lead to Deal
+Scenario: Lead to Deal Flow
 
   Given user navigates to Companies page
   When user creates a new company
@@ -19,3 +19,8 @@ Scenario: Lead to Deal
   Given user navigates to Deals page
   When user creates a new deal
   Then deal should be created successfully
+
+  # Pending Assignment
+  # Create Follow-up Task
+  # Move Deal to Won
+  # Verify Company-Contact-Deal relationship
