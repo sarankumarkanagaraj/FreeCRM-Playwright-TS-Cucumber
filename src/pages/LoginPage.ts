@@ -1,8 +1,8 @@
 import { BasePage } from './BasePage';
-import { LoginPageLocators } from '../locators/LoginPageLocators';
+import { LoginLocators } from '../locators/LoginLocators';
 
 export class LoginPage extends BasePage {
-  private locator = new LoginPageLocators();
+  private locator = new LoginLocators();
 
   async launchApplication(url: string) {
     await this.page.goto(url);

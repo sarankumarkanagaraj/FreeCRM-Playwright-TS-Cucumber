@@ -11,12 +11,9 @@ export interface ICustomWorld extends World {
   feature?: messages.Pickle;
   context?: BrowserContext;
   page?: Page;
-
   testName?: string;
   startTime?: Date;
-
   server?: APIRequestContext;
-
   username?: string;
   playwrightOptions?: PlaywrightTestOptions;
 }
@@ -27,6 +24,18 @@ export class CustomWorld extends World implements ICustomWorld {
   }
 
   debug = false;
+
+  feature?: messages.Pickle;
+  context?: BrowserContext;
+  page?: Page;
+
+  testName?: string;
+  startTime?: Date;
+
+  server?: APIRequestContext;
+
+  username?: string;
+  playwrightOptions?: PlaywrightTestOptions;
 }
 
 setWorldConstructor(CustomWorld);

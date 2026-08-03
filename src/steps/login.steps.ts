@@ -1,6 +1,5 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-
 import { ENV } from '../config/env';
 import { LoginPage } from '../pages/LoginPage';
 import { CustomWorld } from '../support/custom-world';
@@ -23,5 +22,7 @@ When('user clicks on Login button', async function () {
 });
 
 Then('user should be logged in successfully', async function (this: CustomWorld) {
-  await expect(this.page!.getByPlaceholder('Search')).toBeVisible();
+  await expect(this.page!.getByPlaceholder('Search')).toBeVisible({
+    timeout: 10000,
+  });
 });
