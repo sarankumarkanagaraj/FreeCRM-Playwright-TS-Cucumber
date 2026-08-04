@@ -10,18 +10,45 @@ steps:
       versionSpec: '20.x'
     displayName: 'Install Node.js'
 
-  - script: npm install
+  - script: npm ci
     displayName: 'Install Dependencies'
 
   - script: npx playwright install --with-deps
     displayName: 'Install Playwright Browsers'
 
+  - script: npx tsc --noEmit
+    displayName: 'TypeScript Validation'
+
   - script: npm run cucumber
-    displayName: 'Run Automation Tests'
+    displayName: 'Run Cucumber Tests'
+    env:
+      APP_USERNAME: $(APP_USERNAME)
+      APP_PASSWORD: $(APP_PASSWORD)
 
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: 'reports'
       ArtifactName: 'AutomationReports'
+      publishLocation: 'Container'
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'traces'
+      ArtifactName: 'PlaywrightTraces'
+      publishLocation: 'Container'
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'screenshots'
+      ArtifactName: 'Screenshots'
+      publishLocation: 'Container'
+    condition: always()
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'videos'
+      ArtifactName: 'Videos'
       publishLocation: 'Container'
     condition: always()
