@@ -10,6 +10,7 @@ import { ensureDir } from 'fs-extra';
 let browser: Browser;
 
 const tracesDir = 'traces';
+const isCI = process.env.CI === 'true';
 
 setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
 
@@ -18,7 +19,7 @@ BeforeAll(async function () {
     case 'firefox':
       browser = await firefox.launch({
         ...config.browserOptions,
-        args: ['--start-maximized']
+        args: isCI ? [] : ['--start-maximized']
       });
       break;
 
@@ -30,7 +31,7 @@ BeforeAll(async function () {
       browser = await chromium.launch({
         ...config.browserOptions,
         channel: 'msedge',
-        args: ['--start-maximized']
+        args: isCI ? [] : ['--start-maximized']
       });
       break;
 
@@ -38,14 +39,14 @@ BeforeAll(async function () {
       browser = await chromium.launch({
         ...config.browserOptions,
         channel: 'chrome',
-        args: ['--start-maximized']
+        args: isCI ? [] : ['--start-maximized']
       });
       break;
 
     default:
       browser = await chromium.launch({
         ...config.browserOptions,
-        args: ['--start-maximized']
+        args: isCI ? [] : ['--start-maximized']
       });
   }
 
@@ -60,7 +61,14 @@ Before(async function (this: ICustomWorld, { pickle }) {
 
   this.context = await browser.newContext({
     acceptDownloads: true,
-    viewport: null,
+
+    viewport: isCI
+      ? {
+          width: 1440,
+          height: 900
+        }
+      : null,
+
     recordVideo: {
       dir: 'videos'
     }
