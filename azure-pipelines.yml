@@ -5,10 +5,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: NodeTool@0
+  - task: UseNode@1
+    displayName: 'Use Node.js 20'
     inputs:
-      versionSpec: '20.x'
-    displayName: 'Install Node.js'
+      version: '20.x'
 
   - script: npm ci
     displayName: 'Install Dependencies'
@@ -34,40 +34,45 @@ steps:
       BASE_URL: $(BASE_URL)
       HEADLESS: 'true'
 
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    condition: always()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'reports/junit.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+      mergeTestResults: true
+      failTaskOnFailedTests: false
+      testRunTitle: 'Team 3 - Playwright Cucumber Results'
+
   - task: PublishBuildArtifacts@1
+    displayName: 'Publish HTML Reports'
+    condition: always()
     inputs:
       PathtoPublish: 'reports'
       ArtifactName: 'AutomationReports'
       publishLocation: 'Container'
-    condition: always()
 
   - task: PublishBuildArtifacts@1
+    displayName: 'Publish Traces'
+    condition: always()
     inputs:
       PathtoPublish: 'traces'
       ArtifactName: 'PlaywrightTraces'
       publishLocation: 'Container'
-    condition: always()
 
   - task: PublishBuildArtifacts@1
+    displayName: 'Publish Screenshots'
+    condition: always()
     inputs:
       PathtoPublish: 'screenshots'
       ArtifactName: 'Screenshots'
       publishLocation: 'Container'
-    condition: always()
 
   - task: PublishBuildArtifacts@1
+    displayName: 'Publish Videos'
+    condition: always()
     inputs:
       PathtoPublish: 'videos'
       ArtifactName: 'Videos'
       publishLocation: 'Container'
-    condition: always()
-
-    - task: PublishTestResults@2
-  displayName: 'Publish Test Results'
-  condition: always()
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'reports/junit.xml'
-    mergeTestResults: true
-    failTaskOnFailedTests: false
-    testRunTitle: 'Team 3 - Playwright Cucumber Results'
