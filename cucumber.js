@@ -9,13 +9,15 @@ const getWorldParams = () => {
 const config = {
   import: ['src/**/*.ts'],
   format: [
-    // 'message:e2e/reports/cucumber-report.ndjson',
     'json:reports/cucumber-report.json',
     'html:reports/report.html',
+    'junit:reports/junit.xml',
     'summary',
     'progress-bar'
   ],
-  formatOptions: { snippetInterface: 'async-await' },
+  formatOptions: {
+    snippetInterface: 'async-await'
+  },
   worldParameters: getWorldParams()
 };
 

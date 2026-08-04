@@ -61,3 +61,13 @@ steps:
       ArtifactName: 'Videos'
       publishLocation: 'Container'
     condition: always()
+
+    - task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  condition: always()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'reports/junit.xml'
+    mergeTestResults: true
+    failTaskOnFailedTests: false
+    testRunTitle: 'Team 3 - Playwright Cucumber Results'
