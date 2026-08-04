@@ -1,11 +1,9 @@
 import { LaunchOptions } from '@playwright/test';
 
-const isCI = process.env.CI === 'true';
-
 const browserOptions: LaunchOptions = {
-  // Azure DevOps -> Headless
-  // Local -> Headed (unless HEADLESS=true is explicitly set)
-  headless: isCI || process.env.HEADLESS === 'true',
+  // Azure DevOps uses HEADLESS=true
+  // Local runs remain headed unless HEADLESS=true is explicitly set
+  headless: process.env.HEADLESS === 'true',
 
   slowMo: Number(process.env.SLOWMO ?? 0),
 
