@@ -1,7 +1,7 @@
 import { ICustomWorld } from './custom-world';
 import { config } from './config';
 
-import { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } from '@cucumber/cucumber';
+import { Before, After, BeforeAll, AfterAll, setDefaultTimeout } from '@cucumber/cucumber';
 
 import { chromium, firefox, webkit, request, Browser, ConsoleMessage } from '@playwright/test';
 
@@ -16,7 +16,10 @@ setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
 BeforeAll(async function () {
   switch (config.browser) {
     case 'firefox':
-      browser = await firefox.launch(config.browserOptions);
+      browser = await firefox.launch({
+        ...config.browserOptions,
+        args: ['--start-maximized']
+      });
       break;
 
     case 'webkit':
@@ -26,22 +29,29 @@ BeforeAll(async function () {
     case 'msedge':
       browser = await chromium.launch({
         ...config.browserOptions,
-        channel: 'msedge'
+        channel: 'msedge',
+        args: ['--start-maximized']
       });
       break;
 
     case 'chrome':
       browser = await chromium.launch({
         ...config.browserOptions,
-        channel: 'chrome'
+        channel: 'chrome',
+        args: ['--start-maximized']
       });
       break;
 
     default:
-      browser = await chromium.launch(config.browserOptions);
+      browser = await chromium.launch({
+        ...config.browserOptions,
+        args: ['--start-maximized']
+      });
   }
 
   await ensureDir(tracesDir);
+  await ensureDir('screenshots');
+  await ensureDir('videos');
 });
 
 Before(async function (this: ICustomWorld, { pickle }) {
@@ -50,12 +60,9 @@ Before(async function (this: ICustomWorld, { pickle }) {
 
   this.context = await browser.newContext({
     acceptDownloads: true,
-
-    recordVideo: process.env.PWVIDEO === 'true' ? { dir: 'screenshots' } : undefined,
-
-    viewport: {
-      width: 1440,
-      height: 900
+    viewport: null,
+    recordVideo: {
+      dir: 'videos'
     }
   });
 
@@ -80,24 +87,23 @@ Before(async function (this: ICustomWorld, { pickle }) {
 });
 
 After(async function (this: ICustomWorld, { result }) {
+  const timePart = this.startTime?.toISOString().replace(/:/g, '_').split('.')[0];
+
   if (result) {
     this.attach(`Status: ${result.status}. Duration:${result.duration?.seconds}s`);
 
-    if (result.status !== Status.PASSED) {
-      const image = await this.page?.screenshot();
+    const image = await this.page?.screenshot({
+      path: `screenshots/${this.testName}-${timePart}.png`,
+      fullPage: true
+    });
 
-      if (image) {
-        this.attach(image, 'image/png');
-      }
-
-      const timePart = this.startTime?.toISOString().replace(/:/g, '_').split('.')[0];
-
-      await this.context?.tracing.stop({
-        path: `${tracesDir}/${this.testName}-${timePart}.zip`
-      });
-    } else {
-      await this.context?.tracing.stop();
+    if (image) {
+      this.attach(image, 'image/png');
     }
+
+    await this.context?.tracing.stop({
+      path: `${tracesDir}/${this.testName}-${timePart}.zip`
+    });
   }
 
   await this.server?.dispose();

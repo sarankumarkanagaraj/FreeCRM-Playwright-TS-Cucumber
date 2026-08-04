@@ -178,16 +178,11 @@ npm run lint
 - Dynamic Test Data
 - Playwright + Cucumber Framework
 
-### Pending Enhancements
+## Pending Enhancements
 
-The following assignment scenarios are identified but pending implementation due to additional application modules/UI:
-
-- Follow-up Task creation
-- Onboarding Task creation
-- Task Assignment
-- Task Completion
+- Task module automation
 - Activity History validation
-- Pipeline Count validation
-- Deal Notes automation (pending UI implementation)
+- Pipeline count validation
+- Additional end-to-end business scenarios
 
 ---
